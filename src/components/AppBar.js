@@ -14,6 +14,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 
+import SoxHead from '../assets/soxhead.png'
+
 import { useNavigate } from 'react-router-dom';
 
 import './css/AppBar.css';
@@ -41,7 +43,7 @@ function  ResponsiveAppBar({ displayAccount }) {
     <AppBar position="static" >
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
-          <WhatshotIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <WhatshotIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -97,8 +99,10 @@ function  ResponsiveAppBar({ displayAccount }) {
               </MenuItem>
             </Menu>
           </Box>
-          <WhatshotIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <img id='soxHead' src={SoxHead} alt="SoxHead" style={{ maxWidth: '42px', maxHeight: '42px' }} />
+          {/* <WhatshotIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
+            id='titleLAND'
             variant="h5"
             noWrap
             component="a"

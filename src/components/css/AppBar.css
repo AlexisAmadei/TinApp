@@ -5,3 +5,14 @@
 .css-hip9hq-MuiPaper-root-MuiAppBar-root {
     background-color: #001C30 !important;
 }
+
+#soxHead {
+    margin-right: 8px;
+    padding: 8px;
+}
+
+@media screen and (max-width: 300px) {
+    #soxHead {
+        display: none;
+    }
+}
