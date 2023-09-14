@@ -91,7 +91,7 @@ function  ResponsiveAppBar({ displayAccount }) {
             >
               <MenuItem onClick={() => {
                 handleCloseNavMenu();
-                navigate('/terrier');
+                navigate('/security/login');
               }}>
                 <Typography textAlign="center">Le Terrier</Typography>
               </MenuItem>
@@ -126,7 +126,7 @@ function  ResponsiveAppBar({ displayAccount }) {
             <Button
               onClick={() => {
                 handleCloseNavMenu();
-                navigate('/terrier');
+                navigate('/security/login');
               }}
               style={{ fontFamily: 'Creepster', fontSize: '1.1rem' }}
               sx={{ my: 2, color: 'white', display: 'block' }}

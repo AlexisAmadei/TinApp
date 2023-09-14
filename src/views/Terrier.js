@@ -19,15 +19,16 @@ export default function Terrier() {
     };
   }, []);
 
-  const handleLogin = (e) => {
-    const formData = new FormData(e.target);
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
     const email = formData.get("email");
-    const password = formData.get("password");
-    signInWithEmailAndPassword(auth, email, password).catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode, errorMessage);
-    });
+    const password = formData.get("pwd");
+
+    signInWithEmailAndPassword(auth, email, password)
+      .catch((error) => {
+        console.error(error);
+      })
   }
 
   if (!showConnexion && !askAccount) {
@@ -50,11 +51,11 @@ export default function Terrier() {
   } else if (showConnexion) {
     return (
       <div className="terrier-wrapper">
-        <form id="connexion-form" onSubmit={handleLogin}>
-          <h1>Connexion</h1>
-          <input type="text" label="email" placeholder="Email" />
-          <input type="password" label="password" placeholder="Mot de passe" />
-          <button id="button">Se connecter</button>
+        <h1>Connexion</h1>
+        <form onSubmit={handleLogin} className="loginForm">
+          <input type="text" label="email" placeholder="Email" name="email" required />
+          <input type="password" label="password" placeholder="Mot de passe" name="pwd" required />
+          <input type="submit" value="Se connecter" />
         </form>
       </div>
     );
