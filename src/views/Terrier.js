@@ -51,12 +51,19 @@ export default function Terrier() {
   } else if (showConnexion) {
     return (
       <div className="terrier-wrapper">
-        <h1>Connexion</h1>
-        <form onSubmit={handleLogin} className="loginForm">
-          <input type="text" label="email" placeholder="Email" name="email" required />
-          <input type="password" label="password" placeholder="Mot de passe" name="pwd" required />
-          <input type="submit" value="Se connecter" />
-        </form>
+        <div className="login-box">
+          <a id="return-button" onClick={()=>{setShowConnexion(false)}}><p>←Back</p></a>
+          <h1>Login</h1>
+          <form onSubmit={handleLogin} >
+            <div className="user-box">
+              <input type="text" label="email" placeholder="Email" name="email" required />
+            </div>
+            <div className="user-box">
+              <input type="password" label="password" placeholder="Mot de passe" name="pwd" required />
+            </div>
+            <input type="submit" className="button" value="Connexion" />
+          </form>
+        </div>
       </div>
     );
   }

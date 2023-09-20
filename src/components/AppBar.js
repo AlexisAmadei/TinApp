@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
+// import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 import SoxHead from '../assets/soxhead.png'
 
@@ -122,7 +122,10 @@ function  ResponsiveAppBar({ displayAccount }) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              onClick={handleCloseNavMenu}
+              onClick={()=>{
+                handleCloseNavMenu();
+                navigate('/');
+              }}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               Accueil
