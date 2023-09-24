@@ -16,3 +16,16 @@
         display: none;
     }
 }
+
+#logout-button {
+    border: none ;
+    display: flex;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+    position: relative;
+
+    color: #fff;
+    font-family: "Chakra Petch";
+    font-size: 1.1rem;
+}

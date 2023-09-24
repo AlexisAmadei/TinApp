@@ -1,0 +1,12 @@
+.landing-container {
+    height: 100%;
+    width: 100%;
+}
+
+.landing-body {
+    font-family: 'Chakra Petch';
+}
+
+.landing-body h1 {
+    text-align: center;
+}

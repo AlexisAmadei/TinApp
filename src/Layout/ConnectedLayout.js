@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { auth } from "../.config/firebaseConfig";
-import { signOut } from "firebase/auth";
+
 import ResponsiveAppBar from "../components/AppBar";
+// import { Container } from "@mui/material";
 
 export default function ConnectedLayout({ user }) {
   const navigate = useNavigate();
@@ -12,16 +12,9 @@ export default function ConnectedLayout({ user }) {
       <div>
         <ResponsiveAppBar
           displayAccount={false}
+          logout={true}
         />
         <Outlet />
-        <div className="logout">
-          <button id="button" onClick={() => {
-            signOut(auth)
-            navigate("/")
-          }}>
-            Déconnexion
-          </button>
-        </div>
       </div>
     );
   } else {

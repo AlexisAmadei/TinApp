@@ -63,6 +63,9 @@ button:hover {
 /* LOGIN FORM */
 
 #return-button {
+  background: none;
+  border: none;
+  color: #03e9f4;
   cursor: pointer;
 }
 

@@ -52,7 +52,7 @@ export default function Terrier() {
     return (
       <div className="terrier-wrapper">
         <div className="login-box">
-          <a id="return-button" onClick={()=>{setShowConnexion(false)}}><p>←Back</p></a>
+          <button id="return-button" onClick={()=>{setShowConnexion(false)}}><p>← Go Back</p></button>
           <h1>Login</h1>
           <form onSubmit={handleLogin} >
             <div className="user-box">

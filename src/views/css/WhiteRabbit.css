@@ -1,0 +1,13 @@
+.connected-wrapper {
+    display: flex;
+}
+
+.connected-notification {
+    position: absolute;
+    bottom: -100px;
+    right: 50%;
+    color: white;
+    background-color: #39e75f;
+    border-radius: 25px;
+    padding: 0 8px 0 8px;
+}

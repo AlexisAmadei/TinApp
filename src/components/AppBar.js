@@ -8,11 +8,16 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import LogoutIcon from '@mui/icons-material/Logout';
+// import Avatar from '@mui/material/Avatar';
+// import Tooltip from '@mui/material/Tooltip';
 // import WhatshotIcon from '@mui/icons-material/Whatshot';
+
+// firebase import
+import { auth } from "../.config/firebaseConfig";
+import { signOut } from "firebase/auth";
 
 import SoxHead from '../assets/soxhead.png'
 
@@ -20,25 +25,25 @@ import { useNavigate } from 'react-router-dom';
 
 import './css/AppBar.css';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function  ResponsiveAppBar({ displayAccount }) {
+function ResponsiveAppBar({ displayAccount, logout }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  // const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
   return (
     <AppBar position="static" >
       <Container maxWidth="xl" >
@@ -122,7 +127,7 @@ function  ResponsiveAppBar({ displayAccount }) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              onClick={()=>{
+              onClick={() => {
                 handleCloseNavMenu();
                 navigate('/');
               }}
@@ -142,7 +147,28 @@ function  ResponsiveAppBar({ displayAccount }) {
             </Button>
           </Box>
 
-          {displayAccount && (
+          {/* box right centered */}
+          {logout && (
+            <Box
+              alignSelf='centered'
+              sx={{
+                flexGrow: 1,
+                display: 'flex',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                mr: 2,
+              }}
+            >
+              <button id='logout-button' onClick={() => {
+                signOut(auth)
+                navigate("/")
+              }}>
+                <LogoutIcon sx={{ mr: 1 }} />
+                <p id='logout-text'>Logout</p>
+              </button>
+            </Box>
+          )}
+          {/* {displayAccount && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -172,7 +198,7 @@ function  ResponsiveAppBar({ displayAccount }) {
                 ))}
               </Menu>
             </Box>
-          )}
+          )} */}
         </Toolbar>
       </Container>
     </AppBar>
