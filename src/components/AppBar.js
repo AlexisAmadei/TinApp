@@ -105,7 +105,6 @@ function ResponsiveAppBar({ displayAccount, logout }) {
             </Menu>
           </Box>
           <img id='soxHead' src={SoxHead} alt="SoxHead" style={{ maxWidth: '42px', maxHeight: '42px' }} />
-          {/* <WhatshotIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             id='titleLAND'
             variant="h5"
@@ -163,42 +162,11 @@ function ResponsiveAppBar({ displayAccount, logout }) {
                 signOut(auth)
                 navigate("/")
               }}>
-                <LogoutIcon sx={{ mr: 1 }} />
+                <LogoutIcon id='logout-icon' sx={{ mr: 1 }} />
                 <p id='logout-text'>Logout</p>
               </button>
             </Box>
           )}
-          {/* {displayAccount && (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          )} */}
         </Toolbar>
       </Container>
     </AppBar>

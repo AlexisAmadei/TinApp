@@ -1,11 +1,12 @@
 .connected-wrapper {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .connected-notification {
     position: absolute;
     bottom: -60px;
-    right: 50%;
     color: white;
     background-color: #39e75f;
     border-radius: 25px;

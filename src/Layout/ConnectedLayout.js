@@ -15,6 +15,7 @@ export default function ConnectedLayout({ user }) {
           logout={true}
         />
         <Outlet />
+        {/* footer */}
       </div>
     );
   } else {
