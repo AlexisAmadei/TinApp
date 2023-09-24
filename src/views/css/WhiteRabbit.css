@@ -24,3 +24,7 @@
 .notification-animation-exit {
     transform: translateY(100px);
 }
+
+.notification-remove {
+    display: none;
+}
