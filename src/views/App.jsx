@@ -1,16 +1,18 @@
+import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import './css/App.css';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from "../.config/firebaseConfig";
+
 import Landing from './Landing';
 import Terrier from './Terrier';
 import Loading from '../components/Loading'
-
 import SecurityLayout from '../Layout/SecurityLayout';
 import ConnectedLayout from '../Layout/ConnectedLayout';
-import { useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from "../.config/firebaseConfig";
 import WhiteRabbit from './WhiteRabbit';
+import NotFoundPage from './404';
+import './css/App.css';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,6 +30,7 @@ function App() {
           <Route path='/' element={<ConnectedLayout user={user} />}>
             <Route path='white-rabbit' element={<WhiteRabbit />} />
           </Route>
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </div>
