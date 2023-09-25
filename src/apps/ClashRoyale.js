@@ -7,6 +7,7 @@ export default function AppCR() {
     <div className="cr-app-wrapper">
       <div className="cr-app-header">
         <h1>Clash Royale Companion</h1>
+        <p>Coming soon :)</p>
       </div>
     </div>
   );
