@@ -1,15 +1,20 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ActionAreaCard from "../components/AppCard";
 import { Container } from "@mui/material";
 
+import { db } from '../.config/firebaseConfig'
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
 import "./css/WhiteRabbit.css";
 
 export default function WhiteRabbit() {
   const navigate = useNavigate();
-  const [fakeLoading, setFakeLoading] = React.useState(true);
+  const [fakeLoading, setFakeLoading] = useState(true);
+  const user = getAuth().currentUser;
 
   useEffect(() => {
     setTimeout(() => {
@@ -25,6 +30,19 @@ export default function WhiteRabbit() {
       setFakeLoading(false);
     }, 2400);
   }, []);
+
+  useEffect(() => {
+    async function handleNewUser() {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      if (querySnapshot.empty) {
+        await setDoc(doc(db, "users", user.uid), {
+          pseudo: user.uid,
+          apps: []
+        });
+      }
+    }
+    handleNewUser();
+  }, [user.uid]);
 
   function launchApp(appName) {
     navigate('/app/' + appName);

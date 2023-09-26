@@ -26,9 +26,9 @@ export default function Terrier() {
     const password = formData.get("pwd");
 
     signInWithEmailAndPassword(auth, email, password)
-      .catch((error) => {
-        console.error(error);
-      })
+    .catch((error) => {
+      console.error(error);
+    })
   }
 
   if (!showConnexion && !askAccount) {
@@ -52,7 +52,7 @@ export default function Terrier() {
     return (
       <div className="terrier-wrapper">
         <div className="login-box">
-          <button id="return-button" onClick={()=>{setShowConnexion(false)}}><p>← Go Back</p></button>
+          <button id="return-button" onClick={() => { setShowConnexion(false) }}><p>← Go Back</p></button>
           <h1>Login</h1>
           <form onSubmit={handleLogin} >
             <div className="user-box">
