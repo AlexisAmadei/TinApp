@@ -20,7 +20,7 @@ import AppCR from '../apps/ClashRoyale';
 
 function App() {
   const [user, setUser] = useState(null);
-  onAuthStateChanged(auth, (user) => setUser(user || false));
+  onAuthStateChanged(auth, (user) => setUser(user || null));
 
   if (user === null) return <Loading />;
   return (

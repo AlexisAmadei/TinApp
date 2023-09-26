@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,7 +22,6 @@ import { signOut } from "firebase/auth";
 
 import SoxHead from '../assets/soxhead.png'
 
-import { useNavigate } from 'react-router-dom';
 
 import './css/AppBar.css';
 
@@ -76,7 +76,9 @@ function ResponsiveAppBar({ displayAccount, logout }) {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+                <MenuIcon />
+              {/* <div>
+              </div> */}
             </IconButton>
             <Menu
               id="menu-appbar"
