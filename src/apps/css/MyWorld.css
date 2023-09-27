@@ -1,0 +1,23 @@
+.app-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-map {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+    width: 100%;
+    gap: 8px;
+}
+
+/*
+.worldmap__figure-container svg {
+    width: 100% !important;
+    height: 100% !important;
+} */
+
+.form-control {
+    width: 25%;
+}

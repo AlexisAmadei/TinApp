@@ -17,6 +17,7 @@ import AppLayout from '../Layout/AppLayout';
 import './css/App.css';
 
 import AppCR from '../apps/ClashRoyale';
+import MyWorld from '../apps/MyWorld';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,6 +37,7 @@ function App() {
           </Route>
           <Route path='/app' element={<AppLayout user={user} />}>
             <Route path='clash-royale' element={<AppCR />}/>
+            <Route path='my-world' element={<MyWorld />} />
           </Route>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
