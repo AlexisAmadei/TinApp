@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import WorldMap from "react-svg-worldmap";
 import { FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
+import { getAuth } from "firebase/auth";
+import { db } from '../.config/firebaseConfig'
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import countriesList from '../assets/json/countries.json';
 import './css/MyWorld.css';
 
 export default function MyWorld() {
   const countryList = countriesList;
-  const [country, setCountry] = React.useState("");
-  const [purpose, setPurpose] = React.useState("");
-  const [travelMethod, setTravelMethod] = React.useState("");
-  const [formData, setFormData] = React.useState({});
-  const [errorForm, setErrorForm] = React.useState("");
-  const [validateForm, setValidateForm] = React.useState("");
-  const [data, setData] = React.useState([]);
+  const [country, setCountry] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [travelMethod, setTravelMethod] = useState("");
+  const [formData, setFormData] = useState({});
+  const [errorForm, setErrorForm] = useState("");
+  const [validateForm, setValidateForm] = useState("");
+  const [data, setData] = useState([]);
+  const user = getAuth().currentUser;
 
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
@@ -27,6 +31,36 @@ export default function MyWorld() {
     setTravelMethod(event.target.value);
   };
 
+  useEffect(() => {
+    async function getAppData() {
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const querySnapshot = await getDoc(userRef);
+  
+        if (querySnapshot.exists()) {
+          const userData = querySnapshot.data();
+          if (userData && userData.apps && userData.apps.myWorld) {
+            setData(userData.apps.myWorld);
+          } else {
+            setData([]);
+          }
+        } else {
+          setData([]);
+        }
+      }
+    }
+    getAppData();
+  }, [user]);
+
+  async function updateUserData() {
+    if (user) {
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, {
+        "apps.myWorld": data,
+      });
+    }
+  }
+
   function handleSubmit() {
     if (country && purpose && travelMethod) {
       setFormData({
@@ -36,6 +70,7 @@ export default function MyWorld() {
       });
       data.push({ country: country.toLowerCase(), value: 100 });
       setValidateForm("Country added !");
+      updateUserData();
     } else {
       setErrorForm("Veuillez remplir tous les champs");
     }
