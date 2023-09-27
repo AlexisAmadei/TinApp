@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import RefreshIcon from '@mui/icons-material/Refresh';
+// import RefreshIcon from '@mui/icons-material/Refresh';
 
 import { db } from '../.config/firebaseConfig'
 import { doc, updateDoc, getDoc } from "firebase/firestore";
@@ -65,25 +65,24 @@ export default function AppCR() {
   }
 
   // stats functions
-  async function getStats() {
-    if (!userCR) return;
-    const url = `https://proxy.royaleapi.dev/v1/players/%23${userCR}`;
-    const api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjliYzhjYTIwLTRlY2ItNDdkOC05MjI0LTU0NjgzMGY0NjA1MSIsImlhdCI6MTY5NTc3MTg3Mywic3ViIjoiZGV2ZWxvcGVyL2U4YzEzNDQzLTc0MDktMTYyNC1kNWNmLTZjZTI5OWQ0NGQ3MiIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiXSwidHlwZSI6ImNsaWVudCJ9XX0.AzxWS4CKqNAD2aSlACOHuvFqqAHrAFrzBYM-Gqai_C9xx5sijxQCOTCAloeWiFMD-aFZE-HxEPFNfhaLE96vhw"
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${api_key}`);
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(result => parseStats(result))
-      .catch(error => console.log('error', error));
-  }
-
   useEffect(() => {
+    async function getStats() {
+      if (!userCR) return;
+      const url = `https://proxy.royaleapi.dev/v1/players/%23${userCR}`;
+      const api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjliYzhjYTIwLTRlY2ItNDdkOC05MjI0LTU0NjgzMGY0NjA1MSIsImlhdCI6MTY5NTc3MTg3Mywic3ViIjoiZGV2ZWxvcGVyL2U4YzEzNDQzLTc0MDktMTYyNC1kNWNmLTZjZTI5OWQ0NGQ3MiIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiXSwidHlwZSI6ImNsaWVudCJ9XX0.AzxWS4CKqNAD2aSlACOHuvFqqAHrAFrzBYM-Gqai_C9xx5sijxQCOTCAloeWiFMD-aFZE-HxEPFNfhaLE96vhw"
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${api_key}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(result => parseStats(result))
+        .catch(error => console.log('error', error));
+    }
     getStats();
   }, [userCR]);
 
