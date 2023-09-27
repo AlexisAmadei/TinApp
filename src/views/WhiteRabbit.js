@@ -64,6 +64,12 @@ export default function WhiteRabbit() {
               img={"https://supercell.com/images/8654bffbaa77efb91243d3706b739c25/1050/og_clashroyale.d235f90b.webp"}
               onClick={() => launchApp("clash-royale")}
             />
+            <ActionAreaCard
+              title={"My World !"}
+              description={"Track all the countries you've visited !"}
+              img={"https://services.meteored.com/img/article/climateclock-en-nueva-york-que-hay-que-tomar-en-cuenta-281551-1_1024.jpeg"}
+              onClick={() => launchApp("my-world")}
+            />
           </div>
         )}
         <div className="connected-notification">
