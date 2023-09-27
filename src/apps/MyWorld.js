@@ -35,7 +35,6 @@ export default function MyWorld() {
         travelMethod: travelMethod
       });
       data.push({ country: country.toLowerCase(), value: 100 });
-      console.log(data);
       setValidateForm("Country added !");
     } else {
       setErrorForm("Veuillez remplir tous les champs");
