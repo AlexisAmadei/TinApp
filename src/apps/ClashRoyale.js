@@ -30,14 +30,11 @@ export default function AppCR() {
         const userRef = doc(db, "users", user.uid);
         const querySnapshot = await getDoc(userRef);
         const userData = querySnapshot.data();
-
-        // Check if user data contains the 'clashRoyale' field
-        if (userData && userData.clashRoyale) {
-          setUserCR(userData.clashRoyale);
+        if (userData && userData.apps.clashRoyale) {
+          setUserCR(userData.apps.clashRoyale);
         }
       }
     }
-
     getUserData();
   }, [user]);
 
@@ -50,7 +47,6 @@ export default function AppCR() {
         });
       }
     }
-
     updateUserData();
   }, [userCR, user]);
 
@@ -63,7 +59,6 @@ export default function AppCR() {
     setEdit(false);
   }
 
-  // stats functions
   useEffect(() => {
     async function getStats() {
       if (!userCR) return;
@@ -71,7 +66,6 @@ export default function AppCR() {
       const api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjliYzhjYTIwLTRlY2ItNDdkOC05MjI0LTU0NjgzMGY0NjA1MSIsImlhdCI6MTY5NTc3MTg3Mywic3ViIjoiZGV2ZWxvcGVyL2U4YzEzNDQzLTc0MDktMTYyNC1kNWNmLTZjZTI5OWQ0NGQ3MiIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiXSwidHlwZSI6ImNsaWVudCJ9XX0.AzxWS4CKqNAD2aSlACOHuvFqqAHrAFrzBYM-Gqai_C9xx5sijxQCOTCAloeWiFMD-aFZE-HxEPFNfhaLE96vhw"
       var myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${api_key}`);
-
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
