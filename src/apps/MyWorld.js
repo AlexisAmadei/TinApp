@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "@mui/material/Container";
 import WorldMap from "react-svg-worldmap";
 import { FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
