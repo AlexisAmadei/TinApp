@@ -87,7 +87,7 @@ export default function AppCR() {
   }, [userCR]);
 
   function parseStats(stats) {
-    const { name, trophies, expLevel, wins, losses, battleCount, threeCrownWins, totalDonations, role, clan } = stats;
+    const { name, trophies, expLevel, wins, losses, battleCount, threeCrownWins, totalDonations, role, clan, bestTrophies } = stats;
     setStats({
       pseudo: name,
       trophies: trophies,
@@ -99,6 +99,7 @@ export default function AppCR() {
       donations: totalDonations,
       role: role,
       clan: clan.name,
+      bestTrophies: bestTrophies
     });
   }
 
@@ -106,37 +107,39 @@ export default function AppCR() {
     <div className="cr-app-wrapper">
       <div className="cr-app-header">
         <h1>Clash Royale Companion</h1>
-        <Container>
-          <div id="get-started">
-            {!edit && (
-              <div id="savedID">
-                <p>Current save ID: <span>#{userCR}</span></p>
-                <EditIcon onClick={() => {
-                  setEdit(true);
-                }} />
-              </div>
-            )}
-            {edit && (
-              <div id="editID">
-                <p>{"Edit your ID : #"}</p>
-                <input
-                  type="text"
-                  placeholder="#"
-                  value={inputValue}
-                  onChange={(e) => {
-                    setInputValue(e.target.value);
-                  }}
-                />
-                <CheckCircleIcon onClick={changeID} />
-              </div>
-            )}
-          </div>
+      </div>
+      <Container>
+        <div id="get-started">
+          {!edit && (
+            <div id="savedID">
+              <p>Current save ID: <span>#{userCR}</span></p>
+              <EditIcon onClick={() => {
+                setEdit(true);
+              }} />
+            </div>
+          )}
+          {edit && (
+            <div id="editID">
+              <p>{"Edit your ID : #"}</p>
+              <input
+                type="text"
+                placeholder="#"
+                value={inputValue}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                }}
+              />
+              <CheckCircleIcon onClick={changeID} />
+            </div>
+          )}
+        </div>
+        <div className="global-container-stats">
           <div className="stats">
-            <h3>Your stats: </h3>
+            <h2>Your stats: </h2>
             <div className="container-stats">
               <p>Pseudo: {stats.pseudo}</p>
               <p>Trophies: {stats.trophies}</p>
-              <p>Max trophies: {stats.maxTrophies}</p>
+              <p>Max trophies: {stats.bestTrophies}</p>
               <p>Account Level: {stats.level}</p>
               <p>Total battles: {stats.total}</p>
               <p>Wins: {stats.wins}</p>
@@ -145,14 +148,14 @@ export default function AppCR() {
             </div>
           </div>
           <div className="stats">
-            <h3>Clan stats: </h3>
+            <h2>Clan stats: </h2>
             <div className="container-stats">
               <p>Clan Name: {stats.clan}</p>
               <p>Role: {stats.role}</p>
             </div>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </div>
   );
 }

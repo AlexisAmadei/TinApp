@@ -1,3 +1,17 @@
+.cr-app-wrapper {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.cr-app-header {
+    display: flex;
+    flex-direction: column;
+}
+
 .cr-app-header h1 {
     font-family: 'Chakra Petch';
     text-align: center;
@@ -30,9 +44,17 @@
     margin: 16px 0;
 }
 
-h3, .stats p {
+p {
     padding: 0;
     margin: 0;
+    font-size: larger;
+    font-family: 'Chakra Petch';
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Chakra Petch';
 }
 
 .container-stats {
@@ -40,4 +62,19 @@ h3, .stats p {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.global-container-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 24px 0;
+    gap: 32px;
+}
+
+@media (max-width: 550px) {
+    .global-container-stats {
+        flex-direction: column;
+    }
 }

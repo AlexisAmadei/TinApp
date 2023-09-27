@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import HomeIcon from '@mui/icons-material/Home';
-import "./SideDrawer.css"
+import "./AppLayout.css"
 
 export default function AppLayout({ user }) {
   const navigate = useNavigate();
@@ -11,9 +11,10 @@ export default function AppLayout({ user }) {
       <div className="appLayout-wrapper">
         <div className="side-drawer">
           <div className="drawer-header">
-          <a href="/white-rabbit/">
-            <HomeIcon style={{ fontSize: 50 }} />
-          </a>
+            <a href="/white-rabbit/">
+              <HomeIcon style={{ fontSize: 42 }} />
+            </a>
+            <h3>TINAPP</h3>
           </div>
         </div>
         <div className="app-content">
