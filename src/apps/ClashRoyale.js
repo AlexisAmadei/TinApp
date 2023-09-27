@@ -46,7 +46,7 @@ export default function AppCR() {
       if (user && userCR) {
         const userRef = doc(db, "users", user.uid);
         await updateDoc(userRef, {
-          clashRoyale: userCR,
+          "apps.clashRoyale": userCR,
         });
       }
     }
