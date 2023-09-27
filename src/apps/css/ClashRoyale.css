@@ -73,8 +73,16 @@ h2 {
     gap: 32px;
 }
 
+span {
+    margin: 4px;
+}
+
 @media (max-width: 550px) {
     .global-container-stats {
         flex-direction: column;
+        gap: 0;
+    }
+    .stats {
+        margin: 8px 0;
     }
 }

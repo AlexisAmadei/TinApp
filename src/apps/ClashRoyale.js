@@ -87,7 +87,22 @@ export default function AppCR() {
   }, [userCR]);
 
   function parseStats(stats) {
-    const { name, trophies, expLevel, wins, losses, battleCount, threeCrownWins, totalDonations, role, clan, bestTrophies } = stats;
+    const {
+      name,
+      trophies,
+      expLevel,
+      wins,
+      losses,
+      battleCount,
+      threeCrownWins,
+      totalDonations,
+      role,
+      clan,
+      bestTrophies,
+      clanCardsCollected,
+      arena,
+      leagueStatistics,
+    } = stats;
     setStats({
       pseudo: name,
       trophies: trophies,
@@ -95,11 +110,14 @@ export default function AppCR() {
       wins: wins,
       losses: losses,
       total: battleCount,
-      perfectWins: threeCrownWins,
+      threeCrownWins: threeCrownWins,
       donations: totalDonations,
       role: role,
       clan: clan.name,
-      bestTrophies: bestTrophies
+      bestTrophies: bestTrophies,
+      clanCardsCollected: clanCardsCollected,
+      arena: arena.name,
+      leagueStatistics: leagueStatistics,
     });
   }
 
@@ -138,13 +156,16 @@ export default function AppCR() {
             <h2>Your stats: </h2>
             <div className="container-stats">
               <p>Pseudo: {stats.pseudo}</p>
+              <p>Account Level: {stats.level}</p>
+              <span />
+              <p>Current arena: {stats.arena}</p>
               <p>Trophies: {stats.trophies}</p>
               <p>Max trophies: {stats.bestTrophies}</p>
-              <p>Account Level: {stats.level}</p>
+              <span />
               <p>Total battles: {stats.total}</p>
+              <p>Perfect win: {stats.threeCrownWins}</p>
               <p>Wins: {stats.wins}</p>
               <p>Losses: {stats.losses}</p>
-              <p>Perfect win: { }</p>
             </div>
           </div>
           <div className="stats">
@@ -152,6 +173,19 @@ export default function AppCR() {
             <div className="container-stats">
               <p>Clan Name: {stats.clan}</p>
               <p>Role: {stats.role}</p>
+              <p>Clan card collected: {stats.clanCardsCollected}</p>
+            </div>
+          </div>
+          <div className="stats">
+            <h2>League Stats</h2>
+            <div className="container-stats">
+              <p>Best season: {stats.leagueStatistics?.bestSeason?.trophies}</p>
+              <span />
+              <p>Current season: {stats.leagueStatistics?.currentSeason?.trophies}</p>
+              <p>Current season best: {stats.leagueStatistics?.currentSeason?.bestTrophies}</p>
+              <span />
+              <p>Previous season: {stats.leagueStatistics?.previousSeason?.trophies}</p>
+              <p>Previous season best: {stats.leagueStatistics?.previousSeason?.bestTrophies}</p>
             </div>
           </div>
         </div>
