@@ -36,7 +36,7 @@ export default function MyWorld() {
       if (user) {
         const userRef = doc(db, "users", user.uid);
         const querySnapshot = await getDoc(userRef);
-  
+
         if (querySnapshot.exists()) {
           const userData = querySnapshot.data();
           if (userData && userData.apps && userData.apps.myWorld) {
@@ -68,7 +68,7 @@ export default function MyWorld() {
         purpose: purpose,
         travelMethod: travelMethod
       });
-      data.push({ country: country.toLowerCase(), value: 100 });
+      data.push({ country: country.toLowerCase()});
       setValidateForm("Country added !");
       updateUserData();
     } else {
@@ -82,6 +82,17 @@ export default function MyWorld() {
     setPurpose("");
     setTravelMethod("");
   }
+
+  const stylingFunction = (context) => {
+    return {
+      fill: context.value === 1 ? "red" : context.value === 2 ? "green" : "blue",
+      fillOpacity: 1,
+      stroke: "green",
+      strokeWidth: 1,
+      strokeOpacity: 0.2,
+      cursor: "pointer"
+    }
+  };
 
   return (
     <div className="my-world-wrapper">
@@ -165,7 +176,7 @@ export default function MyWorld() {
       <Container style={{ display: "flex", justifyContent: "center" }}>
         <WorldMap
           data={data}
-          color="red"
+          styleFunction={stylingFunction}
         />
       </Container>
     </div>

@@ -8,6 +8,7 @@ import { db } from '../.config/firebaseConfig'
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+import Loading from '../components/Loading';
 import './css/ClashRoyale.css';
 
 export default function AppCR() {
@@ -15,6 +16,7 @@ export default function AppCR() {
   const [userCR, setUserCR] = useState("");
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     pseudo: "",
     trophies: "",
@@ -112,6 +114,7 @@ export default function AppCR() {
       arena: arena.name,
       leagueStatistics: leagueStatistics,
     });
+    setLoading(false);
   }
 
   return (
@@ -120,68 +123,73 @@ export default function AppCR() {
         <h1>Clash Royale Companion</h1>
       </div>
       <Container>
-        <div id="get-started">
-          {!edit && (
-            <div id="savedID">
-              <p>Current save ID: <span>#{userCR}</span></p>
-              <EditIcon onClick={() => {
-                setEdit(true);
-              }} />
+        {loading && <Loading />}
+        {!loading && (
+          <>
+            <div id="get-started">
+              {!edit && (
+                <div id="savedID">
+                  <p>Current save ID: <span>#{userCR}</span></p>
+                  <EditIcon onClick={() => {
+                    setEdit(true);
+                  }} />
+                </div>
+              )}
+              {edit && (
+                <div id="editID">
+                  <p>{"Edit your ID : #"}</p>
+                  <input
+                    type="text"
+                    placeholder="#"
+                    value={inputValue}
+                    onChange={(e) => {
+                      setInputValue(e.target.value);
+                    }}
+                  />
+                  <CheckCircleIcon onClick={changeID} />
+                </div>
+              )}
             </div>
-          )}
-          {edit && (
-            <div id="editID">
-              <p>{"Edit your ID : #"}</p>
-              <input
-                type="text"
-                placeholder="#"
-                value={inputValue}
-                onChange={(e) => {
-                  setInputValue(e.target.value);
-                }}
-              />
-              <CheckCircleIcon onClick={changeID} />
+            <div className="global-container-stats">
+              <div className="stats">
+                <h2>Your stats: </h2>
+                <div className="container-stats">
+                  <p>Pseudo: {stats.pseudo}</p>
+                  <p>Account Level: {stats.level}</p>
+                  <span />
+                  <p>Current arena: {stats.arena}</p>
+                  <p>Trophies: {stats.trophies}</p>
+                  <p>Max trophies: {stats.bestTrophies}</p>
+                  <span />
+                  <p>Total battles: {stats.total}</p>
+                  <p>Perfect win: {stats.threeCrownWins}</p>
+                  <p>Wins: {stats.wins}</p>
+                  <p>Losses: {stats.losses}</p>
+                </div>
+              </div>
+              <div className="stats">
+                <h2>Clan stats: </h2>
+                <div className="container-stats">
+                  <p>Clan Name: {stats.clan}</p>
+                  <p>Role: {stats.role}</p>
+                  <p>Clan card collected: {stats.clanCardsCollected}</p>
+                </div>
+              </div>
+              <div className="stats">
+                <h2>League Stats</h2>
+                <div className="container-stats">
+                  <p>Best season: {stats.leagueStatistics?.bestSeason?.trophies}</p>
+                  <span />
+                  <p>Current season: {stats.leagueStatistics?.currentSeason?.trophies}</p>
+                  <p>Current season best: {stats.leagueStatistics?.currentSeason?.bestTrophies}</p>
+                  <span />
+                  <p>Previous season: {stats.leagueStatistics?.previousSeason?.trophies}</p>
+                  <p>Previous season best: {stats.leagueStatistics?.previousSeason?.bestTrophies}</p>
+                </div>
+              </div>
             </div>
-          )}
-        </div>
-        <div className="global-container-stats">
-          <div className="stats">
-            <h2>Your stats: </h2>
-            <div className="container-stats">
-              <p>Pseudo: {stats.pseudo}</p>
-              <p>Account Level: {stats.level}</p>
-              <span />
-              <p>Current arena: {stats.arena}</p>
-              <p>Trophies: {stats.trophies}</p>
-              <p>Max trophies: {stats.bestTrophies}</p>
-              <span />
-              <p>Total battles: {stats.total}</p>
-              <p>Perfect win: {stats.threeCrownWins}</p>
-              <p>Wins: {stats.wins}</p>
-              <p>Losses: {stats.losses}</p>
-            </div>
-          </div>
-          <div className="stats">
-            <h2>Clan stats: </h2>
-            <div className="container-stats">
-              <p>Clan Name: {stats.clan}</p>
-              <p>Role: {stats.role}</p>
-              <p>Clan card collected: {stats.clanCardsCollected}</p>
-            </div>
-          </div>
-          <div className="stats">
-            <h2>League Stats</h2>
-            <div className="container-stats">
-              <p>Best season: {stats.leagueStatistics?.bestSeason?.trophies}</p>
-              <span />
-              <p>Current season: {stats.leagueStatistics?.currentSeason?.trophies}</p>
-              <p>Current season best: {stats.leagueStatistics?.currentSeason?.bestTrophies}</p>
-              <span />
-              <p>Previous season: {stats.leagueStatistics?.previousSeason?.trophies}</p>
-              <p>Previous season best: {stats.leagueStatistics?.previousSeason?.bestTrophies}</p>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </Container>
     </div>
   );
