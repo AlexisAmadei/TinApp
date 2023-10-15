@@ -26,4 +26,4 @@ src/.config/.env
 src/apps/template.json
 
 src/.config/.env
-src/apps/template.json
+src/apps/templateCR.json
