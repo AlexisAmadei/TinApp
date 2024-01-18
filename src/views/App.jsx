@@ -18,6 +18,7 @@ import './css/App.css';
 
 import AppCR from '../apps/ClashRoyale';
 import MyWorld from '../apps/MyWorld';
+import ClashofClans from '../apps/ClashofClans';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,6 +39,7 @@ function App() {
           <Route path='/app' element={<AppLayout user={user} />}>
             <Route path='clash-royale' element={<AppCR />}/>
             <Route path='my-world' element={<MyWorld />} />
+            <Route path='clash-of-clans' element={<ClashofClans />} />
           </Route>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>

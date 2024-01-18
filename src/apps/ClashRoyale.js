@@ -32,8 +32,9 @@ export default function AppCR() {
         const userRef = doc(db, "users", user.uid);
         const querySnapshot = await getDoc(userRef);
         const userData = querySnapshot.data();
-        if (userData && userData.apps.clashRoyale) {
-          setUserCR(userData.apps.clashRoyale);
+        if (userData && userData.apps) {
+          if (userData.apps.clashRoyale)
+            setUserCR(userData.apps.clashRoyale);
         }
       }
     }
@@ -65,7 +66,7 @@ export default function AppCR() {
     async function getStats() {
       if (!userCR) return;
       const url = `https://proxy.royaleapi.dev/v1/players/%23${userCR}`;
-      const api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjliYzhjYTIwLTRlY2ItNDdkOC05MjI0LTU0NjgzMGY0NjA1MSIsImlhdCI6MTY5NTc3MTg3Mywic3ViIjoiZGV2ZWxvcGVyL2U4YzEzNDQzLTc0MDktMTYyNC1kNWNmLTZjZTI5OWQ0NGQ3MiIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiXSwidHlwZSI6ImNsaWVudCJ9XX0.AzxWS4CKqNAD2aSlACOHuvFqqAHrAFrzBYM-Gqai_C9xx5sijxQCOTCAloeWiFMD-aFZE-HxEPFNfhaLE96vhw"
+      const api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImMxYjAwZDY2LTI1MjktNDg4Mi1iZWQzLTNiMTQzZjFkNzM5OSIsImlhdCI6MTcwNTIzODEyOSwic3ViIjoiZGV2ZWxvcGVyL2U4YzEzNDQzLTc0MDktMTYyNC1kNWNmLTZjZTI5OWQ0NGQ3MiIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiLCIxOTkuMzYuMTU4LjEwMCIsIjg3LjExOS4xODYuNjEiXSwidHlwZSI6ImNsaWVudCJ9XX0.trstjgj9cte8k7beSsir2FeMVDEltMAR7zQ8k8Q11qpoy7mNEpG2JQWAsOLt6vWO1NfQ8Am-qhlRud6RmV-pMQ"
       var myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${api_key}`);
       var requestOptions = {
@@ -123,7 +124,23 @@ export default function AppCR() {
         <h1>Clash Royale Companion</h1>
       </div>
       <Container>
-        {loading && <Loading />}
+        {userCR === "" && loading && (
+          <div id="get-started">
+            <p style={{ paddingRight: "4px"}}>Get started by entering your ID</p>
+            <input
+              type="text"
+              placeholder="#"
+              value={inputValue}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
+            />
+            <CheckCircleIcon onClick={() => {
+              setUserCR(inputValue);
+            }} />
+          </div>
+        )}
+        {userCR && loading && <Loading />}
         {!loading && (
           <>
             <div id="get-started">

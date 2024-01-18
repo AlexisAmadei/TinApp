@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+
 import Container from "@mui/material/Container";
-import WorldMap from "react-svg-worldmap";
 import { FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
+
+import WorldMap from "react-svg-worldmap";
+
 import { getAuth } from "firebase/auth";
 import { db } from '../.config/firebaseConfig'
 import { doc, updateDoc, getDoc } from "firebase/firestore";
+
 import countriesList from '../assets/json/countries.json';
 import './css/MyWorld.css';
 
