@@ -69,6 +69,18 @@ export default function WhiteRabbit() {
             img={"https://supercell.com/images/4c0ab0c1fb2958e72103f81632fee096/og_clashofclans.f3149338.jpg"}
             onClick={() => launchApp("clash-of-clans")}
           />
+          <ActionAreaCard
+            title={"Exaroton"}
+            description={"MC server manager"}
+            img={"https://cdn.logojoy.com/wp-content/uploads/20231208133956/11-30-23_Minecraft-Logo-Evolution_HEADER.webp"}
+            onClick={() => launchApp("exaroton")}
+          />
+          <ActionAreaCard
+            title={"Pokedle"}
+            description={"You already know what it is !"}
+            img={"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/404px-International_Pok%C3%A9mon_logo.svg.png"}
+            onClick={() => launchApp("pokedle")}
+          />
         </div>
       </div>
     </Container>

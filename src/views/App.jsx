@@ -19,6 +19,7 @@ import './css/App.css';
 import AppCR from '../apps/ClashRoyale';
 import MyWorld from '../apps/MyWorld';
 import ClashofClans from '../apps/ClashofClans';
+import Pokedle from '../apps/Pokedle';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,6 +41,7 @@ function App() {
             <Route path='clash-royale' element={<AppCR />}/>
             <Route path='my-world' element={<MyWorld />} />
             <Route path='clash-of-clans' element={<ClashofClans />} />
+            <Route path='pokedle' element={<Pokedle />} />
           </Route>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
