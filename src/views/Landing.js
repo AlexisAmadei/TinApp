@@ -1,9 +1,9 @@
 import React from "react";
 
 import ResponsiveAppBar from "../components/AppBar";
-import { Container } from "@mui/material";
-
+import { Button, Container } from "@mui/material";
 import "./css/Landing.css";
+import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
@@ -28,6 +28,13 @@ export default function Landing() {
             </p>
             <p>This web app is like a playground for me for testing new things and recreating cool stuff</p>
           </div>
+        </div>
+        <div className="access-app">
+          <Link to={'/security/login'} >
+            <Button variant="contained" color="primary" size="large">
+              Access the app
+            </Button>
+          </Link>
         </div>
       </Container>
     </div>
