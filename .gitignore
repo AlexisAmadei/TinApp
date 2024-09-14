@@ -29,3 +29,4 @@ src/.config/.env
 src/apps/templateCR.json
 debug.log
 package-lock.json
+package-lock.json
