@@ -24,13 +24,12 @@ import SoxHead from '../assets/soxhead.png'
 
 
 import './css/AppBar.css';
-
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { useCookies } from 'react-cookie';
 
 function ResponsiveAppBar({ displayAccount, logout }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  // const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,17 +37,21 @@ function ResponsiveAppBar({ displayAccount, logout }) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
+
+  async function handleSignOut() {
+    try {
+      await signOut(auth);
+      removeCookie('user');
+      navigate('/security/login');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <AppBar position="static" >
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
-          {/* <WhatshotIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -160,10 +163,7 @@ function ResponsiveAppBar({ displayAccount, logout }) {
                 mr: 2,
               }}
             >
-              <button id='logout-button' onClick={() => {
-                signOut(auth)
-                navigate("/")
-              }}>
+              <button id='logout-button' onClick={handleSignOut}>
                 <LogoutIcon id='logout-icon' sx={{ mr: 1 }} />
                 <p id='logout-text'>Logout</p>
               </button>

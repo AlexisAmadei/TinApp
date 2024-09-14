@@ -10,10 +10,18 @@ import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 import "./css/WhiteRabbit.css";
+import { useCookies } from "react-cookie";
 
 export default function WhiteRabbit() {
   const navigate = useNavigate();
   const user = getAuth().currentUser;
+  const [cookies, setCookie] = useCookies(['user']);
+
+  useEffect(() => {
+    if (user) {
+      setCookie('user', user.uid);
+    }
+  }, [user])
 
   useEffect(() => {
     async function handleNewUser() {
