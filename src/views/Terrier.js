@@ -8,6 +8,7 @@ import askAccountCreate from "../utils/askAccount";
 export default function Terrier() {
   const [showConnexion, setShowConnexion] = useState(false);
   const [askAccount, setAskAccount] = useState(false);
+  const [validateAskConnection, setValidateAskConnection] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -36,7 +37,8 @@ export default function Terrier() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const email = formData.get("email");
-    console.log(askAccountCreate(email));
+    console.info(askAccountCreate(email));
+    setValidateAskConnection(true);
   }
 
   if (!showConnexion && !askAccount) {
@@ -84,6 +86,7 @@ export default function Terrier() {
             <div className="user-box">
               <input type="text" label="email" placeholder="Email" name="email" required />
             </div>
+            {validateAskConnection && <p>Account creation request sent</p>}
             <input type="submit" className="button" value="Validate" />
           </form>
         </div>
