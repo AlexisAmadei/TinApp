@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
@@ -25,11 +26,14 @@ import SoxHead from '../assets/soxhead.png'
 
 import './css/AppBar.css';
 import { useCookies } from 'react-cookie';
+import getUserData from '../utils/getUserData';
 
 function ResponsiveAppBar({ displayAccount, logout }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [displayAdminMenu, setDisplayAdminMenu] = useState(false);
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const user = auth.currentUser;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -48,6 +52,17 @@ function ResponsiveAppBar({ displayAccount, logout }) {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      getUserData(user)
+        .then((userData) => {
+          if (userData.admin === true) {
+            setDisplayAdminMenu(true);
+          }
+        })
+    }
+  }, [user]);
+
   return (
     <AppBar position="static" >
       <Container maxWidth="xl" >
@@ -60,7 +75,7 @@ function ResponsiveAppBar({ displayAccount, logout }) {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'Chakra Petch',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -79,9 +94,7 @@ function ResponsiveAppBar({ displayAccount, logout }) {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-                <MenuIcon />
-              {/* <div>
-              </div> */}
+              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -120,7 +133,7 @@ function ResponsiveAppBar({ displayAccount, logout }) {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'Chakra Petch',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -133,15 +146,6 @@ function ResponsiveAppBar({ displayAccount, logout }) {
             <Button
               onClick={() => {
                 handleCloseNavMenu();
-                navigate('/');
-              }}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Accueil
-            </Button>
-            <Button
-              onClick={() => {
-                handleCloseNavMenu();
                 navigate('/security/login');
               }}
               style={{ fontFamily: 'Creepster', fontSize: '1.1rem' }}
@@ -149,9 +153,20 @@ function ResponsiveAppBar({ displayAccount, logout }) {
             >
               Le Terrier
             </Button>
+            {displayAdminMenu && (
+              <Button
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate('/admin');
+                }}
+                style={{ fontFamily:'Chakra Petch', fontSize: '1.1rem', letterSpacing: '.1rem' }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Admin
+              </Button>
+            )}
           </Box>
 
-          {/* box right centered */}
           {logout && (
             <Box
               alignSelf='centered'

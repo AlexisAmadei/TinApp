@@ -13,6 +13,7 @@ import NotFoundPage from './404';
 import SecurityLayout from '../Layout/SecurityLayout';
 import ConnectedLayout from '../Layout/ConnectedLayout';
 import AppLayout from '../Layout/AppLayout';
+import AdminView from './AdminView';
 
 import './css/App.css';
 
@@ -35,6 +36,7 @@ function App() {
           </Route>
           <Route path='/' element={<ConnectedLayout user={user}/>}>
             <Route path='white-rabbit' element={<WhiteRabbit />}/>
+            <Route path='admin' element={<AdminView />} />
           </Route>
           <Route path='/app' element={<AppLayout user={user} />}>
             <Route path='clash-royale' element={<AppCR />}/>
